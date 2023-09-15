@@ -37,3 +37,22 @@ For installation instructions please refer to our docs at [https://filebrowser.o
 ## Contributing
 
 If you're interested in contributing to this project, our docs are best places to start [https://filebrowser.org/contributing](https://filebrowser.org/contributing).
+
+## Deployment
+1. install npm & node, make sure using a stable version
+
+2. install goreleaser
+```
+go install github.com/goreleaser/goreleaser@latest
+```
+
+3. build locally
+```
+make build-frontend
+{GOPATH}/bin/goreleaser --snapshot --skip-publish --rm-dist
+```
+
+4. testify
+```
+docker run -ti --rm megaease/filebrowser:{version}
+```

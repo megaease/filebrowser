@@ -46,9 +46,10 @@ func init() {
 
 	persistent.StringVarP(&cfgFile, "config", "c", "", "config file path")
 	persistent.StringP("database", "d", "./filebrowser.db", "database path")
-	flags.Bool("noauth", false, "use the noauth auther when using quick setup")
+	flags.Bool("noauth", true, "use the noauth auther when using quick setup")
 	flags.String("username", "admin", "username for the first user when using quick config")
 	flags.String("password", "", "hashed password for the first user when using quick config (default \"admin\")")
+	flags.String("locale", "zh-cn", "locale to use (default \"zh-cn\")")
 
 	addServerFlags(flags)
 }
@@ -319,7 +320,7 @@ func quickSetup(flags *pflag.FlagSet, d pythonData) {
 		UserHomeBasePath: settings.DefaultUsersHomeBasePath,
 		Defaults: settings.UserDefaults{
 			Scope:       ".",
-			Locale:      "en",
+			Locale:      getParam(flags, "locale"),
 			SingleClick: false,
 			Perm: users.Permissions{
 				Admin:    false,
